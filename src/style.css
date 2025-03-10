@@ -6,8 +6,10 @@
 }
 
 :root {
-    --header-color: #1f60e3;
-    --sidebar-color: #bfbfbf;
+    --header-color: #606c38;
+    --sidebar-color: #bc6c25;
+    --main-bg-color: #fefae0;
+    --hover-shadow-color: #98571e;
 }
 
 body {
@@ -19,12 +21,13 @@ body {
 
 header {
     background: var(--header-color);
-    color: #ffffff;
+    color: var(--main-bg-color);
     grid-column: 1 / -1;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.5rem;
+    gap: 1rem;
 }
 
 .sidebar {
@@ -37,6 +40,7 @@ header {
     justify-content: center;
     margin-bottom: 2rem;
     font-size: 2rem;
+    color: var(--main-bg-color);
 }
 
 .sidebar nav {
@@ -55,7 +59,7 @@ header {
     justify-content: center;
     align-items: center;
     padding-bottom: 1rem;
-    color: #ffffff;
+    color: var(--main-bg-color);
     background: var(--header-color);
 }
 
@@ -63,20 +67,20 @@ header {
     width: 4.5rem;
     height: 4.5rem;
     font-size: 4.5rem;
-    box-shadow: 5px 5px 5px #7b7b7b;
+    box-shadow: 5px 5px 5px var(--hover-shadow-color);
 }
 
 .projects button.project {
     font-size: 1.5rem;
     background: var(--header-color);
-    color: #ffffff;
+    color: var(--main-bg-color);
 }
 
 .projects button.project:hover {
     width: 8.5rem;
     height: 2.5rem;
-    font-size: 1.8rem;
-    box-shadow: 5px 5px 5px #7b7b7b;
+    font-size: 1.7rem;
+    box-shadow: 5px 5px 5px var(--hover-shadow-color);
 }
 
 button {
@@ -84,6 +88,7 @@ button {
     height: 2.5rem;
     border-radius: 5px;
     border: none;
+    font-size: 1.2rem;
 }
 
 button:hover {
@@ -91,14 +96,12 @@ button:hover {
 }
 
 main {
-    background: #ffffff;
+    background: var(--main-bg-color);
     padding: 2rem 4rem;
-}
-
-main {
     display: grid;
     grid-template-rows: 4rem;
     grid-auto-rows: 4rem;
+    gap: 2rem;
 }
 
 main .todo-item {
@@ -107,12 +110,19 @@ main .todo-item {
     justify-content: space-evenly;
     align-items: center;
     border-radius: 5px;
+    font-size: 1.2rem;
 }
 
 .todo-item p {
-    color: #ffffff;
+    color: var(--main-bg-color);
 }
 
 .todo-item button {
     width: 5rem;
+    background: var(--main-bg-color);
+}
+
+img {
+    width: 4rem;
+    height: 4rem;
 }
