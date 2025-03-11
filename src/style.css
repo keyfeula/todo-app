@@ -6,10 +6,11 @@
 }
 
 :root {
-    --header-color: #606c38;
-    --sidebar-color: #bc6c25;
-    --main-bg-color: #fefae0;
-    --hover-shadow-color: #98571e;
+    --header-color: #000000;
+    --sidebar-color: #000000;
+    --light-color: #ffffff;
+    --main-bg-color: #000000;
+    --hover-shadow-color: #11b0e1;
 }
 
 body {
@@ -17,22 +18,24 @@ body {
     display: grid;
     grid-template-columns: 1fr 4fr;
     grid-template-rows: 6rem 1fr;
+    color: var(--light-color);
 }
 
 header {
     background: var(--header-color);
-    color: var(--main-bg-color);
     grid-column: 1 / -1;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.5rem;
     gap: 1rem;
+    border-bottom: 2px solid var(--light-color);
 }
 
 .sidebar {
     background: var(--sidebar-color);
     padding: 1rem;
+    border-right: 2px solid var(--light-color);
 }
 
 .sidebar h2 {
@@ -40,7 +43,6 @@ header {
     justify-content: center;
     margin-bottom: 2rem;
     font-size: 2rem;
-    color: var(--main-bg-color);
 }
 
 .sidebar nav {
@@ -48,6 +50,21 @@ header {
     flex-direction: column;
     align-items: center;
     gap: 2rem;
+}
+
+button {
+    width: 8rem;
+    height: 2.5rem;
+    border-radius: 5px;
+    border: 1px solid var(--light-color);
+    font-size: 1.2rem;
+    color: var(--light-color);
+    background: var(--main-bg-color);
+}
+
+button:hover {
+    cursor: pointer;
+    box-shadow: 0 0 1.2rem var(--hover-shadow-color);
 }
 
 .new-project-btn {
@@ -59,40 +76,23 @@ header {
     justify-content: center;
     align-items: center;
     padding-bottom: 1rem;
-    color: var(--main-bg-color);
-    background: var(--header-color);
 }
 
 .new-project-btn:hover {
     width: 4.5rem;
     height: 4.5rem;
     font-size: 4.5rem;
-    box-shadow: 5px 5px 5px var(--hover-shadow-color);
 }
 
 .projects button.project {
     font-size: 1.5rem;
     background: var(--header-color);
-    color: var(--main-bg-color);
 }
 
 .projects button.project:hover {
     width: 8.5rem;
     height: 2.5rem;
     font-size: 1.7rem;
-    box-shadow: 5px 5px 5px var(--hover-shadow-color);
-}
-
-button {
-    width: 8rem;
-    height: 2.5rem;
-    border-radius: 5px;
-    border: none;
-    font-size: 1.2rem;
-}
-
-button:hover {
-    cursor: pointer;
 }
 
 main {
@@ -111,10 +111,7 @@ main .todo-item {
     align-items: center;
     border-radius: 5px;
     font-size: 1.2rem;
-}
-
-.todo-item p {
-    color: var(--main-bg-color);
+    border: 1px solid var(--light-color);
 }
 
 .todo-item button {
