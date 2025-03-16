@@ -1,18 +1,18 @@
 import "./style.css";
-import { TodoProject } from "./todo-project";
+import { addProject, getProjectsLength, getProjectAt } from "./app-logic";
 
-const domController = (() => {
+(() => {
     const dialog = document.querySelector("dialog");
     const body = document.querySelector("body");
     const projectsContainer = document.querySelector(".projects");
-    const projects = [];
 
     function updateProjectsDisplay() {
         projectsContainer.textContent = "";
-        for (let i = 0; i < projects.length; i++) {
+        const length = getProjectsLength();
+        for (let i = 0; i < length; i++) {
             const newProjectBtn = document.createElement("button");
             newProjectBtn.classList.add("project");
-            newProjectBtn.textContent = projects[i].name;
+            newProjectBtn.textContent = getProjectAt(i).name;
             projectsContainer.append(newProjectBtn);
         }
         const addProjectBtn = document.createElement("button");
@@ -34,8 +34,7 @@ const domController = (() => {
         }
         else if (target.classList.contains("project-submit-btn")) {
             const projectName = document.querySelector("input#project-name").value;
-            const todoProject = new TodoProject(projectName);
-            projects.push(todoProject);
+            addProject(projectName);
             updateProjectsDisplay();
         }
 

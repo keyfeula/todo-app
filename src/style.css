@@ -86,11 +86,12 @@ button:hover {
 .projects button.project {
     font-size: 1.5rem;
     background: var(--header-color);
+    width: 12rem;
 }
 
 .projects button.project:hover {
-    width: 8.5rem;
-    height: 2.5rem;
+    width: 13rem;
+    height: 3rem;
     font-size: 1.7rem;
 }
 
