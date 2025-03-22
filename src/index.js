@@ -6,6 +6,7 @@ import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, se
     const body = document.querySelector("body");
     const projectsContainer = document.querySelector(".projects");
     const todosContainer = document.querySelector(".todos-container");
+    const form = document.querySelector("dialog form");
 
     function updateProjectsDisplay() {
         projectsContainer.textContent = "";
@@ -51,11 +52,70 @@ import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, se
         }
     }
 
+    function createProjectForm() {
+        const nameInputContainer = document.createElement("div");
+        nameInputContainer.classList.add("form-field");
+
+        const nameLabel = document.createElement("label");
+        nameLabel.setAttribute("for", "project-name");
+        nameLabel.textContent = "Project Name";
+        const nameInput = document.createElement("input");
+        nameInput.setAttribute("id", "project-name");
+
+        nameInputContainer.append(nameLabel, nameInput);
+        form.append(nameInputContainer);
+
+        const formBtnsContainer = document.createElement("div");
+        formBtnsContainer.classList.add("form-buttons");
+
+        const submitBtn = document.createElement("button");
+        submitBtn.classList.add("project-submit-btn");
+        submitBtn.setAttribute("type", "button");
+        submitBtn.textContent = "Submit";
+        const closeBtn = document.createElement("button");
+        closeBtn.classList.add("form-close-btn");
+        closeBtn.setAttribute("type", "button");
+        closeBtn.textContent = "Close";
+
+        formBtnsContainer.append(submitBtn, closeBtn);
+        form.append(formBtnsContainer);
+    }
+
+    function createTodoForm() {
+        const nameInputContainer = document.createElement("div");
+        nameInputContainer.classList.add("form-field");
+
+        const nameLabel = document.createElement("label");
+        nameLabel.setAttribute("for", "todo-name");
+        nameLabel.textContent = "To-Do Name";
+        const nameInput = document.createElement("input");
+        nameInput.setAttribute("id", "todo-name");
+
+        nameInputContainer.append(nameLabel, nameInput);
+        form.append(nameInputContainer);
+
+        const formBtnsContainer = document.createElement("div");
+        formBtnsContainer.classList.add("form-buttons");
+
+        const submitBtn = document.createElement("button");
+        submitBtn.classList.add("project-submit-btn");
+        submitBtn.setAttribute("type", "button");
+        submitBtn.textContent = "Submit";
+        const closeBtn = document.createElement("button");
+        closeBtn.classList.add("form-close-btn");
+        closeBtn.setAttribute("type", "button");
+        closeBtn.textContent = "Close";
+
+        formBtnsContainer.append(submitBtn, closeBtn);
+        form.append(formBtnsContainer);
+    }
+
     body.addEventListener("click", (event) => {
         const target = event.target;
         if (target.tagName !== "BUTTON") {
             return;
         }
+
         if (target.classList.contains("new-btn")) {
             dialog.showModal();
         }
@@ -72,4 +132,21 @@ import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, se
             updateTodosDisplay(target.id);
         }
     });
+
+    dialog.addEventListener("click", (event) => {
+        const target = event.target;
+        if (target.tagName !== "BUTTON") {
+            return;
+        }
+
+        if (target.classList.contains("new-todo-btn")) {
+            form.textContent = "";
+            createTodoForm();
+        }
+        else if (target.classList.contains("new-project-btn")) {
+            form.textContent = "";
+            createProjectForm();
+        }
+    });
+
 })();
