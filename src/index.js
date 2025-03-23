@@ -84,19 +84,57 @@ import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, se
     function createTodoForm() {
         const nameInputContainer = document.createElement("div");
         nameInputContainer.classList.add("form-field");
-
         const nameLabel = document.createElement("label");
         nameLabel.setAttribute("for", "todo-name");
         nameLabel.textContent = "To-Do Name";
         const nameInput = document.createElement("input");
         nameInput.setAttribute("id", "todo-name");
-
+        nameInput.setAttribute("maxlength", "20");
         nameInputContainer.append(nameLabel, nameInput);
         form.append(nameInputContainer);
 
+
+        const descriptionContainer = document.createElement("div");
+        descriptionContainer.classList.add("form-field");
+        const descriptionLabel = document.createElement("label");
+        descriptionLabel.setAttribute("for", "description");
+        descriptionLabel.textContent = "Description";
+        const descriptionInput = document.createElement("textarea");
+        descriptionInput.setAttribute("id", "description");
+        descriptionInput.setAttribute("rows", "3");
+        descriptionContainer.append(descriptionLabel, descriptionInput);
+        form.append(descriptionContainer);
+
+
+        const dateInputContainer = document.createElement("div");
+        dateInputContainer.classList.add("form-field");
+        const dateLabel = document.createElement("label");
+        dateLabel.setAttribute("for", "due-date");
+        dateLabel.textContent = "Due Date";
+        const dateInput = document.createElement("input");
+        dateInput.setAttribute("type", "date");
+        dateInput.setAttribute("id", "due-date");
+        dateInputContainer.append(dateLabel, dateInput);
+        form.append(dateInputContainer);
+
+
+        const priorityInputContainer = document.createElement("div");
+        priorityInputContainer.classList.add("form-field");
+        const priorityLabel = document.createElement("label");
+        priorityLabel.setAttribute("for", "priority");
+        priorityLabel.textContent = "Priority (1-3)";
+        const priorityInput = document.createElement("input");
+        priorityInput.setAttribute("type", "number");
+        priorityInput.setAttribute("min", "1");
+        priorityInput.setAttribute("max", "3");
+        priorityInput.setAttribute("id", "priority");
+        priorityInput.setAttribute("maxlength", "150");
+        priorityInputContainer.append(priorityLabel, priorityInput);
+        form.append(priorityInputContainer);
+
+
         const formBtnsContainer = document.createElement("div");
         formBtnsContainer.classList.add("form-buttons");
-
         const submitBtn = document.createElement("button");
         submitBtn.classList.add("project-submit-btn");
         submitBtn.setAttribute("type", "button");
@@ -105,7 +143,6 @@ import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, se
         closeBtn.classList.add("form-close-btn");
         closeBtn.setAttribute("type", "button");
         closeBtn.textContent = "Close";
-
         formBtnsContainer.append(submitBtn, closeBtn);
         form.append(formBtnsContainer);
     }

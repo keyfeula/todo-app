@@ -128,12 +128,12 @@ dialog {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 50%;
 }
 
 dialog .dialog-container {
     display: grid;
     grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr;
 }
 
 dialog::backdrop {
@@ -143,7 +143,7 @@ dialog::backdrop {
 
 dialog .form-option {
     border-right: 2px solid #000000;
-    padding: 1rem;
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -152,7 +152,7 @@ dialog .form-option {
 }
 
 dialog form {
-    padding: 1rem;
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
