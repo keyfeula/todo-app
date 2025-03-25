@@ -148,7 +148,7 @@ dialog .form-option {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1rem; 
+    gap: 1.5rem; 
 }
 
 dialog form {
@@ -157,11 +157,14 @@ dialog form {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
 }
 
 form div {
     display: flex;
+    min-width: 75%;
+    justify-content: space-evenly;
+    align-items: center;
     gap: 1rem;
 }
 

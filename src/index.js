@@ -64,6 +64,7 @@ import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, se
 
         nameInputContainer.append(nameLabel, nameInput);
         form.append(nameInputContainer);
+        nameInput.focus();
 
         const formBtnsContainer = document.createElement("div");
         formBtnsContainer.classList.add("form-buttons");
@@ -92,6 +93,7 @@ import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, se
         nameInput.setAttribute("maxlength", "20");
         nameInputContainer.append(nameLabel, nameInput);
         form.append(nameInputContainer);
+        nameInput.focus();
 
 
         const descriptionContainer = document.createElement("div");
@@ -136,7 +138,7 @@ import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, se
         const formBtnsContainer = document.createElement("div");
         formBtnsContainer.classList.add("form-buttons");
         const submitBtn = document.createElement("button");
-        submitBtn.classList.add("project-submit-btn");
+        submitBtn.classList.add("todo-submit-btn");
         submitBtn.setAttribute("type", "button");
         submitBtn.textContent = "Submit";
         const closeBtn = document.createElement("button");
@@ -168,21 +170,16 @@ import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, se
             setCurrentProjectIndex(target.id);
             updateTodosDisplay(target.id);
         }
-    });
-
-    dialog.addEventListener("click", (event) => {
-        const target = event.target;
-        if (target.tagName !== "BUTTON") {
-            return;
-        }
-
-        if (target.classList.contains("new-todo-btn")) {
+        else if (target.classList.contains("new-todo-btn")) {
             form.textContent = "";
             createTodoForm();
         }
         else if (target.classList.contains("new-project-btn")) {
             form.textContent = "";
             createProjectForm();
+        }
+        else if (target.classList.contains("todo-submit-btn")) {
+            
         }
     });
 
