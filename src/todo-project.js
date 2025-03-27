@@ -1,3 +1,5 @@
+import { TodoItem } from "./todo-item";
+
 export class TodoProject {
     constructor(name = "Untitled") {
         this.name = name;
@@ -8,8 +10,9 @@ export class TodoProject {
         return this.todoItems.length;
     }
 
-    addItem(todoItem) {
-        this.todoItems.push(todoItem);
+    addItem(title, description, dueDate, priority) {
+        const newTodoItem = new TodoItem(title, description, dueDate, priority);
+        this.todoItems.push(newTodoItem);
     }
 
     getTodoAt(index) {

@@ -179,7 +179,12 @@ import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, se
             createProjectForm();
         }
         else if (target.classList.contains("todo-submit-btn")) {
-            
+            const title = document.querySelector("input#todo-name").value;
+            const description = document.querySelector("textarea#description").value;
+            const dueDate = document.querySelector("input#due-date").value;
+            const priority = document.querySelector("input#priority").value;
+            getProjectAt(getCurrentProjectIndex()).addItem(title, description, dueDate, priority);
+            updateTodosDisplay(getCurrentProjectIndex());
         }
     });
 
