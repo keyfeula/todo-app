@@ -58,8 +58,8 @@ button {
     border-radius: 5px;
     border: 2px solid var(--light-color);
     font-size: 1.2rem;
-    color: var(--light-color);
-    background: var(--main-bg-color);
+    color: var(--main-bg-color);
+    background: var(--light-color);
 }
 
 button:hover {
@@ -85,7 +85,6 @@ button:hover {
 
 .projects button.project {
     font-size: 1.5rem;
-    background: var(--header-color);
     width: 12rem;
     display: flex;
     align-items: center;
@@ -102,15 +101,17 @@ main {
     background: var(--main-bg-color);
     padding: 2rem 4rem;
     display: grid;
-    grid-template-rows: 4rem;
+    grid-template-columns: 0.7fr;
+    grid-template-rows: 1rem 4rem;
     grid-auto-rows: 4rem;
     gap: 2rem;
+    justify-content: center;
 }
 
 main .todo-item {
     background: var(--header-color);
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     border-radius: 5px;
     font-size: 1.2rem;
@@ -118,9 +119,13 @@ main .todo-item {
     padding: 2rem 1rem;
 }
 
+.todo-item div {
+    display: flex;
+    gap: 1.5rem;
+}
+
 .todo-item button {
     width: 5rem;
-    background: var(--main-bg-color);
 }
 
 img {
@@ -174,4 +179,6 @@ form div {
 
 dialog button {
     border: none;
+    background: var(--main-bg-color);
+    color: var(--light-color);
 }

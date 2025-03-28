@@ -28,26 +28,31 @@ import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, se
         todosContainer.textContent = "";
         const currentProject = getProjectAt(index);
         const length = currentProject.length;
+
         for (let i = 0; i < length; i++) {
             const newTodoItem = document.createElement("div");
             newTodoItem.classList.add("todo-item");
+            const todoInfo = document.createElement("div");
+            todoInfo.classList.add("todo-info");
+            const todoButtons = document.createElement("div");
+            todoButtons.classList.add("todo-buttons");
+
             const title = document.createElement("p");
+            title.textContent = currentProject.getTodoAt(i).title;
             const dueDate = document.createElement("p");
+            dueDate.textContent = currentProject.getTodoAt(i).dueDate;
 
             const editBtn = document.createElement("button");
             editBtn.classList.add("edit-btn");
+            editBtn.textContent = "Edit";
             const deleteBtn = document.createElement("button");
             deleteBtn.classList.add("todo-delete-btn");
-
-            title.textContent = currentProject.getTodoAt(i).title;
-            dueDate.textContent = currentProject.getTodoAt(i).dueDate;
-            editBtn.textContent = "Edit";
             deleteBtn.textContent = "Delete";
 
-            newTodoItem.append(title);
-            newTodoItem.append(dueDate);
-            newTodoItem.append(editBtn);
-            newTodoItem.append(deleteBtn);
+            todoInfo.append(title, dueDate);
+            newTodoItem.append(todoInfo);
+            todoButtons.append(editBtn, deleteBtn);
+            newTodoItem.append(todoButtons);
             todosContainer.append(newTodoItem);
         }
     }
@@ -189,7 +194,7 @@ import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, se
             updateTodosDisplay(getCurrentProjectIndex());
         }
         else if (target.classList.contains("todo-delete-btn")) {
-            
+            getProjectAt(getCurrentProjectIndex());
         }
     });
 
