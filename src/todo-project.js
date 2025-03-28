@@ -19,4 +19,8 @@ export class TodoProject {
         return this.todoItems[index];
     }
 
+    removeTodoAt(index) {
+        this.todoItems.splice(index, 1);
+    }
+
 }

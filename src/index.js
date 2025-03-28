@@ -37,7 +37,7 @@ import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, se
             const editBtn = document.createElement("button");
             editBtn.classList.add("edit-btn");
             const deleteBtn = document.createElement("button");
-            deleteBtn.classList.add("delete-btn");
+            deleteBtn.classList.add("todo-delete-btn");
 
             title.textContent = currentProject.getTodoAt(i).title;
             dueDate.textContent = currentProject.getTodoAt(i).dueDate;
@@ -104,6 +104,7 @@ import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, se
         const descriptionInput = document.createElement("textarea");
         descriptionInput.setAttribute("id", "description");
         descriptionInput.setAttribute("rows", "3");
+        descriptionInput.setAttribute("maxlength", "150");
         descriptionContainer.append(descriptionLabel, descriptionInput);
         form.append(descriptionContainer);
 
@@ -165,6 +166,7 @@ import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, se
             const projectName = document.querySelector("input#project-name").value;
             addProject(projectName);
             updateProjectsDisplay();
+            updateTodosDisplay(getCurrentProjectIndex());
         }
         else if (target.classList.contains("project")) {
             setCurrentProjectIndex(target.id);
@@ -186,6 +188,13 @@ import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, se
             getProjectAt(getCurrentProjectIndex()).addItem(title, description, dueDate, priority);
             updateTodosDisplay(getCurrentProjectIndex());
         }
+        else if (target.classList.contains("todo-delete-btn")) {
+            
+        }
     });
+
+    addProject("Untitled");
+    updateProjectsDisplay();
+    updateTodosDisplay(getCurrentProjectIndex());
 
 })();

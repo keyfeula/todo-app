@@ -1,5 +1,4 @@
 import { TodoProject } from "./todo-project";
-import { TodoItem } from "./todo-item";
 
 const projects = [];
 let currentProjectIndex = 0;
