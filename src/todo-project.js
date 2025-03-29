@@ -6,6 +6,10 @@ export class TodoProject {
         this.todoItems = [];
     }
 
+    getName() {
+        return this.name;
+    }
+
     get length() {
         return this.todoItems.length;
     }

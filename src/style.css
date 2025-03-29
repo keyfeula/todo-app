@@ -99,13 +99,20 @@ button:hover {
 
 main {
     background: var(--main-bg-color);
-    padding: 2rem 4rem;
+    padding: 1rem 4rem;
     display: grid;
-    grid-template-columns: 0.7fr;
-    grid-template-rows: 1rem 4rem;
+    grid-template-columns: 0.8fr;
+    grid-template-rows: 4rem;
     grid-auto-rows: 4rem;
     gap: 2rem;
     justify-content: center;
+}
+
+main .header-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px solid var(--light-color);
 }
 
 main .todo-item {

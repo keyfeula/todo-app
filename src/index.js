@@ -29,6 +29,14 @@ import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, se
         const currentProject = getProjectAt(index);
         const length = currentProject.length;
 
+        const headerContainer = document.createElement("div");
+        headerContainer.classList.add("header-container");
+        const header = document.createElement("h2");
+        header.classList.add("todo-header");
+        header.textContent = currentProject.getName();
+        headerContainer.append(header);
+        todosContainer.append(headerContainer);
+
         for (let i = 0; i < length; i++) {
             const newTodoItem = document.createElement("div");
             newTodoItem.classList.add("todo-item");
@@ -47,6 +55,7 @@ import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, se
             editBtn.textContent = "Edit";
             const deleteBtn = document.createElement("button");
             deleteBtn.classList.add("todo-delete-btn");
+            deleteBtn.setAttribute("todo-index", i);
             deleteBtn.textContent = "Delete";
 
             todoInfo.append(title, dueDate);
@@ -194,11 +203,13 @@ import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, se
             updateTodosDisplay(getCurrentProjectIndex());
         }
         else if (target.classList.contains("todo-delete-btn")) {
-            getProjectAt(getCurrentProjectIndex());
+            const index = target.getAttribute("todo-index");
+            getProjectAt(getCurrentProjectIndex()).removeTodoAt(index);
+            updateTodosDisplay(getCurrentProjectIndex());
         }
     });
 
-    addProject("Untitled");
+    addProject("Untitled 1");
     updateProjectsDisplay();
     updateTodosDisplay(getCurrentProjectIndex());
 
