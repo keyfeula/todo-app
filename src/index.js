@@ -1,6 +1,7 @@
 import "./style.css";
 import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, setCurrentProjectIndex } from "./app-logic";
 
+
 (() => {
     const dialog = document.querySelector("dialog");
     const body = document.querySelector("body");
@@ -97,6 +98,7 @@ import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, se
     }
 
     function createTodoForm() {
+        form.textContent = "";
         const nameInputContainer = document.createElement("div");
         nameInputContainer.classList.add("form-field");
         const nameLabel = document.createElement("label");
@@ -206,6 +208,10 @@ import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, se
             const index = target.getAttribute("todo-index");
             getProjectAt(getCurrentProjectIndex()).removeTodoAt(index);
             updateTodosDisplay(getCurrentProjectIndex());
+        }
+        else if (target.classList.contains("edit-btn")) {
+            dialog.showModal();
+            createTodoForm();
         }
     });
 

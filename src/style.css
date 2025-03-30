@@ -99,7 +99,7 @@ button:hover {
 
 main {
     background: var(--main-bg-color);
-    padding: 1rem 4rem;
+    padding: 0 4rem;
     display: grid;
     grid-template-columns: 0.8fr;
     grid-template-rows: 4rem;
@@ -111,8 +111,15 @@ main {
 main .header-container {
     display: flex;
     justify-content: center;
-    align-items: center;
-    border-bottom: 2px solid var(--light-color);
+}
+
+h2.todo-header {
+    border: 2px solid var(--light-color);
+    border-top: none;
+    align-content: center;
+    padding: 0 2rem;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 main .todo-item {
