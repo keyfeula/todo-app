@@ -45,6 +45,7 @@ import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, se
             todoInfo.classList.add("todo-info");
             const todoButtons = document.createElement("div");
             todoButtons.classList.add("todo-buttons");
+            todoButtons.setAttribute("todo-index", i);
 
             const title = document.createElement("p");
             title.textContent = currentProject.getTodoAt(i).title;
@@ -56,7 +57,6 @@ import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, se
             editBtn.textContent = "Edit";
             const deleteBtn = document.createElement("button");
             deleteBtn.classList.add("todo-delete-btn");
-            deleteBtn.setAttribute("todo-index", i);
             deleteBtn.textContent = "Delete";
 
             todoInfo.append(title, dueDate);
@@ -79,7 +79,6 @@ import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, se
 
         nameInputContainer.append(nameLabel, nameInput);
         form.append(nameInputContainer);
-        nameInput.focus();
 
         const formBtnsContainer = document.createElement("div");
         formBtnsContainer.classList.add("form-buttons");
@@ -95,6 +94,7 @@ import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, se
 
         formBtnsContainer.append(submitBtn, closeBtn);
         form.append(formBtnsContainer);
+        nameInput.focus();
     }
 
     function createTodoForm() {
@@ -174,9 +174,11 @@ import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, se
 
         if (target.classList.contains("new-btn")) {
             dialog.showModal();
+            createProjectForm();
         }
         else if (target.classList.contains("form-close-btn")) {
             dialog.close();
+            form.textContent = "";
         }
         else if (target.classList.contains("project-submit-btn")) {
             const projectName = document.querySelector("input#project-name").value;
@@ -205,13 +207,19 @@ import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, se
             updateTodosDisplay(getCurrentProjectIndex());
         }
         else if (target.classList.contains("todo-delete-btn")) {
-            const index = target.getAttribute("todo-index");
+            const index = target.parentNode.getAttribute("todo-index");
             getProjectAt(getCurrentProjectIndex()).removeTodoAt(index);
             updateTodosDisplay(getCurrentProjectIndex());
         }
         else if (target.classList.contains("edit-btn")) {
             dialog.showModal();
             createTodoForm();
+            const project = getProjectAt(getCurrentProjectIndex());
+            const todo = project.getTodoAt(target.parentNode.getAttribute("todo-index"));
+            document.querySelector("input#todo-name").value = todo.title;
+            document.querySelector("textarea#description").value = todo.description;
+            document.querySelector("input#due-date").value = todo.dueDate;
+            document.querySelector("input#priority").value = todo.priority;
         }
     });
 
