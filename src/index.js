@@ -8,6 +8,7 @@ import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, se
     const projectsContainer = document.querySelector(".projects");
     const todosContainer = document.querySelector(".todos-container");
     const form = document.querySelector("dialog form");
+    form.setAttribute("action", "#");
 
     function updateProjectsDisplay() {
         projectsContainer.textContent = "";
@@ -76,6 +77,7 @@ import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, se
         nameLabel.textContent = "Project Name";
         const nameInput = document.createElement("input");
         nameInput.setAttribute("id", "project-name");
+        nameInput.setAttribute("required", "");
 
         nameInputContainer.append(nameLabel, nameInput);
         form.append(nameInputContainer);
@@ -85,7 +87,7 @@ import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, se
 
         const submitBtn = document.createElement("button");
         submitBtn.classList.add("project-submit-btn");
-        submitBtn.setAttribute("type", "button");
+        submitBtn.setAttribute("type", "submit");
         submitBtn.textContent = "Submit";
         const closeBtn = document.createElement("button");
         closeBtn.classList.add("form-close-btn");
@@ -107,6 +109,7 @@ import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, se
         const nameInput = document.createElement("input");
         nameInput.setAttribute("id", "todo-name");
         nameInput.setAttribute("maxlength", "20");
+        nameInput.setAttribute("required", "");
         nameInputContainer.append(nameLabel, nameInput);
         form.append(nameInputContainer);
         nameInput.focus();
@@ -120,6 +123,7 @@ import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, se
         const descriptionInput = document.createElement("textarea");
         descriptionInput.setAttribute("id", "description");
         descriptionInput.setAttribute("rows", "3");
+        descriptionInput.setAttribute("cols", "22");
         descriptionInput.setAttribute("maxlength", "150");
         descriptionContainer.append(descriptionLabel, descriptionInput);
         form.append(descriptionContainer);
@@ -133,6 +137,7 @@ import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, se
         const dateInput = document.createElement("input");
         dateInput.setAttribute("type", "date");
         dateInput.setAttribute("id", "due-date");
+        dateInput.setAttribute("required", "");
         dateInputContainer.append(dateLabel, dateInput);
         form.append(dateInputContainer);
 
@@ -148,6 +153,7 @@ import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, se
         priorityInput.setAttribute("max", "3");
         priorityInput.setAttribute("id", "priority");
         priorityInput.setAttribute("maxlength", "150");
+        priorityInput.setAttribute("required", "");
         priorityInputContainer.append(priorityLabel, priorityInput);
         form.append(priorityInputContainer);
 
@@ -156,7 +162,7 @@ import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, se
         formBtnsContainer.classList.add("form-buttons");
         const submitBtn = document.createElement("button");
         submitBtn.classList.add("todo-submit-btn");
-        submitBtn.setAttribute("type", "button");
+        submitBtn.setAttribute("type", "submit");
         submitBtn.textContent = "Submit";
         const closeBtn = document.createElement("button");
         closeBtn.classList.add("form-close-btn");
@@ -182,6 +188,9 @@ import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, se
         }
         else if (target.classList.contains("project-submit-btn")) {
             const projectName = document.querySelector("input#project-name").value;
+            if (projectName === "") {
+                return;
+            }
             addProject(projectName);
             updateProjectsDisplay();
             updateTodosDisplay(getCurrentProjectIndex());
@@ -203,6 +212,9 @@ import { addProject, getProjectsLength, getProjectAt, getCurrentProjectIndex, se
             const description = document.querySelector("textarea#description").value;
             const dueDate = document.querySelector("input#due-date").value;
             const priority = document.querySelector("input#priority").value;
+            if (title === "" || dueDate === "" || priority < 1 || priority > 3) {
+                return;
+            }
             getProjectAt(getCurrentProjectIndex()).addItem(title, description, dueDate, priority);
             updateTodosDisplay(getCurrentProjectIndex());
         }

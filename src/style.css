@@ -187,13 +187,16 @@ dialog form {
 form div {
     display: flex;
     min-width: 75%;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
-    gap: 1rem;
 }
 
 dialog button {
     border: none;
     background: var(--main-bg-color);
     color: var(--light-color);
+}
+
+input:focus:user-invalid {
+    outline-color: red;
 }
