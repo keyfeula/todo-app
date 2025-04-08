@@ -1,0 +1,27 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+}
+
+body {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: minmax(5rem, 1fr) 4fr;
+    grid-template-columns: minmax(12rem, 1fr) 4fr;
+}
+
+header {
+    background: forestgreen;
+    grid-area: 1 / 1 / 2 / 3;
+}
+
+nav {
+    background: orange;
+}
+
+main {
+    background: blueviolet;
+}
