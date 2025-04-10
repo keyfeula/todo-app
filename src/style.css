@@ -1,18 +1,16 @@
 *, *::before, *::after {
     box-sizing: border-box;
+    font-family: system-ui, sans-serif;
 }
 
 * {
     margin: 0;
+    padding: 0;
 }
 
 :root {
     --main-bg-color: #1b1b1b;
     --font-light-color: #ffffff;
-}
-
-html {
-    font-family: system-ui, sans-serif, Roboto;
 }
 
 body {
@@ -24,20 +22,57 @@ body {
 
 header {
     background: var(--main-bg-color);
-    color: var(--font-light-color);
     grid-area: 1 / 1 / 2 / 3;
     display: flex;
     justify-content: left;
     align-items: center;
     gap: 1.5rem;
     padding-left: 1.5rem;
-    font-size: 1.5rem;
     border-bottom: 4px solid var(--font-light-color);
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: var(--font-light-color);
 }
 
 nav {
     background: var(--main-bg-color);
     border-right: 4px solid var(--font-light-color);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+button {
+    background: var(--main-bg-color);
+    color: var(--font-light-color);
+    border: 2px solid var(--font-light-color);
+}
+
+.project-button {
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    font-size: 1.2rem;
+}
+
+.project-button:hover {
+    cursor: pointer;
+    box-shadow: 0 0 8px var(--font-light-color);
+}
+
+h2 {
+    font-size: 2rem;
+    color: var(--font-light-color);
 }
 
 main {
