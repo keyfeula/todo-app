@@ -63,6 +63,7 @@ button {
     padding: 0.8rem 1.5rem;
     border-radius: 5px;
     font-size: 1.2rem;
+    min-width: 100%;
 }
 
 .project-button:hover {
