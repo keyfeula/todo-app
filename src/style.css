@@ -16,7 +16,7 @@
 body {
     min-height: 100vh;
     display: grid;
-    grid-template-rows: minmax(5rem, 1fr) 5fr;
+    grid-template-rows: 7rem 5fr;
     grid-template-columns: minmax(12rem, 1fr) 4fr;
 }
 
@@ -78,6 +78,69 @@ h2 {
 
 main {
     background: var(--main-bg-color);
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    gap: 1rem;
+    color: var(--font-light-color);
+}
+
+.todos-header {
+    text-align: center;
+}
+
+.todos-container {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    grid-template-rows: 12rem;
+    grid-auto-rows: 12rem;
+    gap: 1.5rem;
+}
+
+.todo {
+    border: 2px solid var(--font-light-color);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.todo-title {
+    padding: 0.5rem 1rem;
+    border-bottom: 2px solid var(--font-light-color);
+}
+
+.todo-body {
+    flex-grow: 1;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.due-date {
+    color: #1dc725;
+}
+
+.todo-body > * {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+.buttons-container {
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.buttons-container button {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    width: 4rem;
+}
+
+.buttons-container button:hover {
+    cursor: pointer;
+    box-shadow: 0 0 5px var(--font-light-color);
 }
 
 img {
