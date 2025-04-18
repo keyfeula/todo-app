@@ -4,10 +4,11 @@ import deleteIcon from "./delete-icon-light.svg";
 import { logicController } from "./logic-controller";
 
 logicController.addProject("project 1");
+logicController.addProject("project 2");
 
 const currentProject = logicController.getCurrentProject();
-currentProject.addTodo("walk dog", "1/1/2025", "1", "desc test");
-currentProject.addTodo("walk dog", "1/1/2025", "1", "desc test");
+currentProject.addTodo("walk dog", "1/1/2025", "1", "test description text");
+currentProject.addTodo("wash car", "1/22/2025", "1", "test description text");
 
 const pageBody = document.querySelector("body");
 const projectsContainer = document.querySelector(".projects-container");
@@ -57,10 +58,11 @@ function updateTodosDisplay() {
 
         const buttonsContainer = document.createElement("div");
         buttonsContainer.classList.add("buttons-container");
+        buttonsContainer.id = `todo-${i}`;
         const editBtn = document.createElement("button");
-        editBtn.classList.add("edit-btn");
+        editBtn.classList.add("todo-edit-btn");
         const deleteBtn = document.createElement("button");
-        deleteBtn.classList.add("delete-btn");
+        deleteBtn.classList.add("todo-delete-btn");
         const deleteBtnIcon = document.createElement("img");
         deleteBtnIcon.setAttribute("src", deleteIcon);
         deleteBtnIcon.setAttribute("alt", "delete button icon");
@@ -82,8 +84,12 @@ pageBody.addEventListener("click", (event) => {
     if (target.classList.contains("project-button")) {
         logicController.setCurrentProjectIndex(target.id.slice(-1));
         todosHeader.textContent = target.textContent;
+        updateTodosDisplay();
+    }
+    else if (target.classList.contains("todo-delete-btn") || target.parentNode.classList.contains("todo-delete-btn")) {
+        logicController.getCurrentProject().removeTodoAt(target.parentNode.id.slice(-1));
+        updateTodosDisplay();
     }
 });
 
 updateProjectDisplay();
-updateTodosDisplay();

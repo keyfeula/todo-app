@@ -46,6 +46,17 @@ nav {
     gap: 1.5rem;
 }
 
+nav .add-btn {
+    width: 4rem;
+    height: 4rem;
+    padding: 1rem;
+    border-radius: 50%;
+}
+
+nav button img {
+    width: 100%;
+}
+
 ul {
     list-style-type: none;
     display: flex;
@@ -59,16 +70,16 @@ button {
     border: 2px solid var(--font-light-color);
 }
 
+button:hover {
+    cursor: pointer;
+    box-shadow: 0 0 8px var(--font-light-color);
+}
+
 .project-button {
     padding: 0.8rem 1.5rem;
     border-radius: 5px;
     font-size: 1.2rem;
     min-width: 100%;
-}
-
-.project-button:hover {
-    cursor: pointer;
-    box-shadow: 0 0 8px var(--font-light-color);
 }
 
 h2 {
@@ -143,9 +154,8 @@ main {
     align-items: center;
 }
 
-.buttons-container button:hover {
-    cursor: pointer;
-    box-shadow: 0 0 5px var(--font-light-color);
+.buttons-container img {
+    height: 75%;
 }
 
 header img {
