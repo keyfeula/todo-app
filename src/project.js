@@ -1,3 +1,5 @@
+import { Todo } from "./todo";
+
 export class Project {
     constructor(name) {
         this.name = name;
@@ -12,8 +14,9 @@ export class Project {
         this.name = newName;
     }
 
-    addTodo(todo) {
-        this.todos.push(todo);
+    addTodo(name, dueDate, priority, description) {
+        const newTodo = new Todo(name, dueDate, priority, description);
+        this.todos.push(newTodo);
     }
 
     getTodoAt(index) {
@@ -22,6 +25,10 @@ export class Project {
 
     removeTodoAt(index) {
         this.todos.splice(index, 1);
+    }
+
+    getTodosLength() {
+        return this.todos.length;
     }
 
 }
