@@ -15,6 +15,7 @@ const projectsContainer = document.querySelector(".projects-container");
 const todosHeader = document.querySelector(".todos-header");
 todosHeader.textContent = logicController.getProjectAt(0).getName();
 const todosContainer = document.querySelector(".todos-container");
+const dialog = document.querySelector("dialog");
 
 function updateProjectDisplay() {
     projectsContainer.textContent = "";
@@ -89,6 +90,9 @@ pageBody.addEventListener("click", (event) => {
     else if (target.classList.contains("todo-delete-btn") || target.parentNode.classList.contains("todo-delete-btn")) {
         logicController.getCurrentProject().removeTodoAt(target.parentNode.id.slice(-1));
         updateTodosDisplay();
+    }
+    else if (target.classList.contains("add-btn") || target.parentNode.classList.contains("add-btn")) {
+        dialog.showModal();
     }
 });
 
