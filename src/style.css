@@ -79,7 +79,8 @@ button:hover {
     padding: 0.8rem 1.5rem;
     border-radius: 5px;
     font-size: 1.2rem;
-    min-width: 100%;
+    width: 8rem;
+    overflow-wrap: break-word;
 }
 
 h2 {
@@ -168,11 +169,55 @@ dialog {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    width: 50%;
+    border: 2px solid var(--font-light-color);
+    border-radius: 5px;
 }
 
-.form-nav button {
+dialog::backdrop {
+    backdrop-filter: blur(5px);
+}
+
+dialog .flex-container {
+    display: flex;
+}
+
+.form-nav {
+    border-right: 2px solid var(--font-light-color);
+}
+
+dialog button {
     padding: 0.5rem 1rem;
     border-radius: 5px;
     font-size: 1.2rem;
     width: 6rem;
+}
+
+form {
+    background: var(--main-bg-color);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 1.5rem;
+}
+
+form .form-field {
+    display: flex;
+    width: 14rem;
+    justify-content: space-between;
+}
+
+label {
+    color: var(--font-light-color);
+}
+
+input:focus {
+    outline: none;
 }

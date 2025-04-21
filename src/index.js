@@ -16,6 +16,7 @@ const todosHeader = document.querySelector(".todos-header");
 todosHeader.textContent = logicController.getProjectAt(0).getName();
 const todosContainer = document.querySelector(".todos-container");
 const dialog = document.querySelector("dialog");
+const form = document.querySelector("form");
 
 function updateProjectDisplay() {
     projectsContainer.textContent = "";
@@ -80,6 +81,33 @@ function updateTodosDisplay() {
     }
 }
 
+function createProjectForm() {
+    form.textContent = "";
+    const formField = document.createElement("div");
+    formField.classList.add("form-field");
+    const nameLabel = document.createElement("label");
+    nameLabel.setAttribute("for", "name-input");
+    nameLabel.textContent = "Name";
+    const nameInput = document.createElement("input");
+    nameInput.id = "name-input";
+    nameInput.setAttribute("maxlength", "20");
+    formField.append(nameLabel, nameInput);
+    form.append(formField);
+
+    const formButtons = document.createElement("div");
+    formButtons.classList.add("form-buttons");
+    const submitBtn = document.createElement("button");
+    submitBtn.classList.add("project-submit-btn");
+    submitBtn.setAttribute("type", "button");
+    submitBtn.textContent = "Submit";
+    const closeBtn = document.createElement("button");
+    closeBtn.classList.add("close-btn");
+    closeBtn.setAttribute("type", "button");
+    closeBtn.textContent = "Close";
+    formButtons.append(submitBtn, closeBtn);
+    form.append(formButtons);
+}
+
 pageBody.addEventListener("click", (event) => {
     const target = event.target;
     if (target.classList.contains("project-button")) {
@@ -93,6 +121,15 @@ pageBody.addEventListener("click", (event) => {
     }
     else if (target.classList.contains("add-btn") || target.parentNode.classList.contains("add-btn")) {
         dialog.showModal();
+        createProjectForm();
+    }
+    else if (target.classList.contains("close-btn")) {
+        dialog.close();
+    }
+    else if (target.classList.contains("project-submit-btn")) {
+        const projectName = document.querySelector("#name-input").value;
+        logicController.addProject(projectName);
+        updateProjectDisplay();
     }
 });
 
