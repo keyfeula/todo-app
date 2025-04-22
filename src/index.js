@@ -34,6 +34,7 @@ function updateProjectDisplay() {
 
 function updateTodosDisplay() {
     todosContainer.textContent = "";
+    todosHeader.textContent = logicController.getCurrentProject().getName();
     const currentProject = logicController.getCurrentProject();
     const todosLength = currentProject.getTodosLength();
     for (let i = 0; i < todosLength; i++) {
@@ -91,6 +92,7 @@ function createProjectForm() {
     const nameInput = document.createElement("input");
     nameInput.id = "name-input";
     nameInput.setAttribute("maxlength", "20");
+    nameInput.setAttribute("required", "");
     formField.append(nameLabel, nameInput);
     form.append(formField);
 
@@ -98,7 +100,73 @@ function createProjectForm() {
     formButtons.classList.add("form-buttons");
     const submitBtn = document.createElement("button");
     submitBtn.classList.add("project-submit-btn");
-    submitBtn.setAttribute("type", "button");
+    submitBtn.setAttribute("type", "submit");
+    submitBtn.textContent = "Submit";
+    const closeBtn = document.createElement("button");
+    closeBtn.classList.add("close-btn");
+    closeBtn.setAttribute("type", "button");
+    closeBtn.textContent = "Close";
+    formButtons.append(submitBtn, closeBtn);
+    form.append(formButtons);
+}
+
+function createTodoForm() {
+    form.textContent = "";
+    const nameField = document.createElement("div");
+    nameField.classList.add("form-field");
+    const nameLabel = document.createElement("label");
+    nameLabel.setAttribute("for", "name-input");
+    nameLabel.textContent = "Name";
+    const nameInput = document.createElement("input");
+    nameInput.id = "name-input";
+    nameInput.setAttribute("maxlength", "20");
+    nameInput.setAttribute("required", "");
+    nameField.append(nameLabel, nameInput);
+    form.append(nameField);
+
+    const dateField = document.createElement("div");
+    dateField.classList.add("form-field");
+    const dateLabel = document.createElement("label");
+    dateLabel.setAttribute("for", "date-input")
+    dateLabel.textContent = "Due Date";
+    const dateInput = document.createElement("input");
+    dateInput.id = "date-input"
+    dateInput.setAttribute("type", "date");
+    dateInput.setAttribute("required", "");
+    dateField.append(dateLabel, dateInput);
+    form.append(dateField);
+
+    const priorityField = document.createElement("div");
+    priorityField.classList.add("form-field");
+    const priorityLabel = document.createElement("label");
+    priorityLabel.setAttribute("for", "priority-input");
+    priorityLabel.textContent = "Priority (1-3)";
+    const priorityInput = document.createElement("input");
+    priorityInput.id = "priority-input";
+    priorityInput.setAttribute("type", "number");
+    priorityInput.setAttribute("required", "");
+    priorityInput.setAttribute("min", "1");
+    priorityInput.setAttribute("max", "3");
+    priorityField.append(priorityLabel, priorityInput);
+    form.append(priorityField);
+
+    const descriptionField = document.createElement("div");
+    descriptionField.classList.add("form-field");
+    const descriptionLabel = document.createElement("label");
+    descriptionLabel.setAttribute("for", "description");
+    descriptionLabel.textContent = "Description";
+    const descriptionInput = document.createElement("textarea");
+    descriptionInput.id = "description";
+    descriptionInput.setAttribute("maxlength", "155");
+    descriptionInput.setAttribute("rows", "5");
+    descriptionField.append(descriptionLabel, descriptionInput);
+    form.append(descriptionField);
+
+    const formButtons = document.createElement("div");
+    formButtons.classList.add("form-buttons");
+    const submitBtn = document.createElement("button");
+    submitBtn.classList.add("todo-submit-btn");
+    submitBtn.setAttribute("type", "submit");
     submitBtn.textContent = "Submit";
     const closeBtn = document.createElement("button");
     closeBtn.classList.add("close-btn");
@@ -123,13 +191,38 @@ pageBody.addEventListener("click", (event) => {
         dialog.showModal();
         createProjectForm();
     }
+    else if (target.classList.contains("todo-form-btn")) {
+        createTodoForm();
+    }
+    else if (target.classList.contains("project-form-btn")) {
+        createProjectForm();
+    }
     else if (target.classList.contains("close-btn")) {
         dialog.close();
     }
     else if (target.classList.contains("project-submit-btn")) {
-        const projectName = document.querySelector("#name-input").value;
-        logicController.addProject(projectName);
+        const nameInput = document.querySelector("#name-input");
+        if (!nameInput.checkValidity()) {
+            return;
+        }
+        logicController.addProject(nameInput.value);
         updateProjectDisplay();
+        updateTodosDisplay();
+    }
+    else if (target.classList.contains("todo-submit-btn")) {
+        const inputs = document.querySelectorAll("input");
+        for (const input of inputs) {
+            if (!input.checkValidity()) {
+                return;
+            }
+        }
+        const name = document.querySelector("#name-input").value;
+        const dueDate = document.querySelector("#date-input").value;
+        const priority = document.querySelector("#priority-input").value;
+        const description = document.querySelector("#description").value;
+        const currentProject = logicController.getCurrentProject();
+        currentProject.addTodo(name, dueDate, priority, description);
+        updateTodosDisplay();
     }
 });
 
