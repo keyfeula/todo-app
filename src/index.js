@@ -3,12 +3,7 @@ import editIcon from "./edit-icon-light.svg";
 import deleteIcon from "./delete-icon-light.svg";
 import { logicController } from "./logic-controller";
 
-logicController.addProject("project 1");
-logicController.addProject("project 2");
-
-const currentProject = logicController.getCurrentProject();
-currentProject.addTodo("walk dog", "1/1/2025", "1", "test description text");
-currentProject.addTodo("wash car", "1/22/2025", "1", "test description text");
+logicController.addProject("Project 1");
 
 const pageBody = document.querySelector("body");
 const projectsContainer = document.querySelector(".projects-container");
@@ -17,6 +12,8 @@ todosHeader.textContent = logicController.getProjectAt(0).getName();
 const todosContainer = document.querySelector(".todos-container");
 const dialog = document.querySelector("dialog");
 const form = document.querySelector("form");
+
+updateTodosDisplay();
 
 function updateProjectDisplay() {
     projectsContainer.textContent = "";
@@ -52,7 +49,7 @@ function updateTodosDisplay() {
         todoInfo.classList.add("todo-info");
         const dueDate = document.createElement("p");
         dueDate.classList.add("due-date");
-        dueDate.textContent = currentProject.getTodoAt(i).getDueDate();
+        dueDate.textContent = "Due: " + currentProject.getTodoAt(i).getDueDate();
         const description = document.createElement("p");
         description.classList.add("description");
         description.textContent = currentProject.getTodoAt(i).getDescription();
@@ -184,8 +181,39 @@ pageBody.addEventListener("click", (event) => {
         updateTodosDisplay();
     }
     else if (target.classList.contains("todo-delete-btn") || target.parentNode.classList.contains("todo-delete-btn")) {
-        logicController.getCurrentProject().removeTodoAt(target.parentNode.id.slice(-1));
+        let todoIndex = "";
+        if (target.classList.contains("todo-delete-btn")) {
+            todoIndex = target.parentNode.id.slice(-1);
+        }
+        else {
+            todoIndex = target.parentNode.parentNode.id.slice(-1);
+        }
+        logicController.getCurrentProject().removeTodoAt(todoIndex);
         updateTodosDisplay();
+    }
+    else if (target.classList.contains("todo-edit-btn") || target.parentNode.classList.contains("todo-edit-btn")) {
+        let todoIndex = "";
+        if (target.classList.contains("todo-edit-btn")) {
+            todoIndex = target.parentNode.id.slice(-1);
+        }
+        else {
+            todoIndex = target.parentNode.parentNode.id.slice(-1);
+        }
+        dialog.showModal();
+        createTodoForm();
+        const todo = logicController.getCurrentProject().getTodoAt(todoIndex);
+        const nameInput = document.querySelector("#name-input");
+        nameInput.value = todo.getName();
+        const dateInput = document.querySelector("#date-input");
+        dateInput.value = todo.getDueDate();
+        const priorityInput = document.querySelector("#priority-input");
+        priorityInput.value = todo.getPriority();
+        const description = document.querySelector("#description");
+        description.value = todo.getDescription();
+        const submitBtn = document.querySelector(".todo-submit-btn");
+        submitBtn.classList.remove("todo-submit-btn");
+        submitBtn.classList.add("edit-submit-btn");
+        submitBtn.id = "edit-" + todoIndex;
     }
     else if (target.classList.contains("add-btn") || target.parentNode.classList.contains("add-btn")) {
         dialog.showModal();
@@ -223,6 +251,11 @@ pageBody.addEventListener("click", (event) => {
         const currentProject = logicController.getCurrentProject();
         currentProject.addTodo(name, dueDate, priority, description);
         updateTodosDisplay();
+    }
+    else if (target.classList.contains("edit-submit-btn")) {
+        const todoIndex = target.id.split("-")[1];
+        const todo = logicController.getCurrentProject().getTodoAt(todoIndex);
+        
     }
 });
 
