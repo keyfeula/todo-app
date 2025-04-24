@@ -14,6 +14,7 @@ const dialog = document.querySelector("dialog");
 const form = document.querySelector("form");
 
 updateTodosDisplay();
+updateProjectDisplay();
 
 function updateProjectDisplay() {
     projectsContainer.textContent = "";

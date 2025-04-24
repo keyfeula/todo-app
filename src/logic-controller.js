@@ -24,5 +24,5 @@ export const logicController = {
 
     setCurrentProjectIndex(newIndex) {
         currentProjectIndex = newIndex;
-    }
+    },
 }
