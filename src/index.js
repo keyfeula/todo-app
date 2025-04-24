@@ -50,6 +50,16 @@ function updateTodosDisplay() {
         const dueDate = document.createElement("p");
         dueDate.classList.add("due-date");
         dueDate.textContent = "Due: " + currentProject.getTodoAt(i).getDueDate();
+        switch (currentProject.getTodoAt(i).getPriority()) {
+            case "1":
+                dueDate.style.color = "#3ed115";
+                break;
+            case "2":
+                dueDate.style.color = "#dfd40a";
+                break;
+            default:
+                dueDate.style.color = "#d01f1f";
+        }
         const description = document.createElement("p");
         description.classList.add("description");
         description.textContent = currentProject.getTodoAt(i).getDescription();
@@ -176,17 +186,17 @@ function createTodoForm() {
 pageBody.addEventListener("click", (event) => {
     const target = event.target;
     if (target.classList.contains("project-button")) {
-        logicController.setCurrentProjectIndex(target.id.slice(-1));
+        logicController.setCurrentProjectIndex(target.id.split("-")[1]);
         todosHeader.textContent = target.textContent;
         updateTodosDisplay();
     }
     else if (target.classList.contains("todo-delete-btn") || target.parentNode.classList.contains("todo-delete-btn")) {
         let todoIndex = "";
         if (target.classList.contains("todo-delete-btn")) {
-            todoIndex = target.parentNode.id.slice(-1);
+            todoIndex = target.parentNode.id.split("-")[1];
         }
         else {
-            todoIndex = target.parentNode.parentNode.id.slice(-1);
+            todoIndex = target.parentNode.parentNode.id.split("-")[1];
         }
         logicController.getCurrentProject().removeTodoAt(todoIndex);
         updateTodosDisplay();
@@ -194,10 +204,10 @@ pageBody.addEventListener("click", (event) => {
     else if (target.classList.contains("todo-edit-btn") || target.parentNode.classList.contains("todo-edit-btn")) {
         let todoIndex = "";
         if (target.classList.contains("todo-edit-btn")) {
-            todoIndex = target.parentNode.id.slice(-1);
+            todoIndex = target.parentNode.id.split("-")[1];
         }
         else {
-            todoIndex = target.parentNode.parentNode.id.slice(-1);
+            todoIndex = target.parentNode.parentNode.id.split("-")[1];
         }
         dialog.showModal();
         createTodoForm();
@@ -236,6 +246,7 @@ pageBody.addEventListener("click", (event) => {
         logicController.addProject(nameInput.value);
         updateProjectDisplay();
         updateTodosDisplay();
+        dialog.close();
     }
     else if (target.classList.contains("todo-submit-btn")) {
         const inputs = document.querySelectorAll("input");
@@ -251,11 +262,28 @@ pageBody.addEventListener("click", (event) => {
         const currentProject = logicController.getCurrentProject();
         currentProject.addTodo(name, dueDate, priority, description);
         updateTodosDisplay();
+        dialog.close();
     }
     else if (target.classList.contains("edit-submit-btn")) {
+        const inputs = document.querySelectorAll("input");
+        for (const input of inputs) {
+            if (!input.checkValidity()) {
+                return;
+            }
+        }
         const todoIndex = target.id.split("-")[1];
         const todo = logicController.getCurrentProject().getTodoAt(todoIndex);
-        
+        const name = document.querySelector("#name-input").value;
+        const dueDate = document.querySelector("#date-input").value;
+        const priority = document.querySelector("#priority-input").value;
+        const description = document.querySelector("#description").value;
+
+        todo.setName(name);
+        todo.setDueDate(dueDate);
+        todo.setPriority(priority);
+        todo.setDescription(description);
+        updateTodosDisplay();
+        dialog.close();
     }
 });
 
